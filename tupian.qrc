@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file alias=":/new/prefix1/123.jpg">123.jpg</file>
+        <file>map.jpg</file>
+        <file>map1.jpg</file>
+    </qresource>
+</RCC>
