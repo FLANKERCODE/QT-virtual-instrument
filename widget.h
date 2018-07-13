@@ -9,6 +9,7 @@
 #include "posix_qextserialport.h"
 #include "lcd.h"
 #include "gps.h"
+#include "mpu.h"
 
 //class QLCDNumber;
 namespace Ui {
@@ -33,6 +34,9 @@ private:
     QTimer *readTimer;
     QTimer *readTimer2;
     QTimer *timer;
+
+    GPS gps;
+    MPUGET mpu;
 
     QByteArray MPU;
     double TEM;

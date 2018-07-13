@@ -1,8 +1,6 @@
 #ifndef GPS_H
 #define GPS_H
-
-#include "posix_qextserialport.h"
-#include <math.h>
+#include <QWidget>
 
 class GPS
 {

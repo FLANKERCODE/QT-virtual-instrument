@@ -16,12 +16,14 @@ SOURCES += main.cpp\
         widget.cpp \
     posix_qextserialport.cpp \
     qextserialbase.cpp \
-    gps.cpp
+    gps.cpp \
+    mpu.cpp
 
 HEADERS  += widget.h \
     posix_qextserialport.h \
     qextserialbase.h \
-    gps.h
+    gps.h \
+    mpu.h
 
 FORMS    += widget.ui
 
