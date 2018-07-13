@@ -1,9 +1,6 @@
 ﻿#include "widget.h"
 #include "ui_widget.h"
-#include <QDebug>
-#include <QLCDNumber>
-#include <QPainter>
-#include<math.h>
+
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -233,7 +230,7 @@ void Widget::paintEvent(QPaintEvent *)
     painter.setPen(Qt::NoPen);
     painter.setBrush(purple);
     painter.save();
-    painter.rotate(Roll);
+    painter.rotate(mpu.Roll);
     painter.drawConvexPolygon(air_1, 3);
     painter.restore();
 
@@ -249,7 +246,7 @@ void Widget::paintEvent(QPaintEvent *)
     painter.setPen(Qt::NoPen);
     painter.setBrush(blue);
     painter.save();
-    painter.rotate(Roll);
+    painter.rotate(mpu.Roll);
     painter.drawConvexPolygon(air_3, 3);
     painter.restore();
 
@@ -257,14 +254,14 @@ void Widget::paintEvent(QPaintEvent *)
     painter.setPen(Qt::NoPen);
     painter.setBrush(blue);
     painter.save();
-    painter.rotate(Roll);
+    painter.rotate(mpu.Roll);
     painter.drawConvexPolygon(air_2, 3);
     painter.restore();
 
     //俯仰刻度线
     painter.save();
     painter.setPen(blank);
-    painter.rotate(Roll);
+    painter.rotate(mpu.Roll);
   /*  for(int j=-4;j<5;j++)
     {
         painter.drawLine(-50,-(Pitch+10*j),50,-(Pitch+10*j));
@@ -289,109 +286,109 @@ void Widget::paintEvent(QPaintEvent *)
     painter.drawLine(-50,80,50,80);
     painter.setPen(blank);
 
-    if(fabs(Pitch)<=10)
+    if(fabs(mpu.Pitch)<=10)
     {
         for(int j=-3;j<4;j++)
         {
             if(j==0)
             {
                 painter.setPen(red);
-                painter.drawLine(-60,-(Pitch*2+20*j),55,-(Pitch*2+20*j));
+                painter.drawLine(-60,-(mpu.Pitch*2+20*j),55,-(mpu.Pitch*2+20*j));
                 pitch[0]=48;
                 pitch[1]=32;
                 QFont font;
                 font.setPixelSize(15);
                 painter.setFont(font);
-                painter.drawText(65,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(65,-(mpu.Pitch*2+20*j)+5,pitch);
             }
             else
             {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
             }
         }
         for(int j=-65;j<70;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>10)&&(Pitch<=20))
+    if((mpu.Pitch>10)&&(mpu.Pitch<=20))
     {
         for(int j=-4;j<3;j++)
         {
             if(j==0)
             {
                 painter.setPen(red);
-                painter.drawLine(-60,-(Pitch*2+20*j),55,-(Pitch*2+20*j));
+                painter.drawLine(-60,-(mpu.Pitch*2+20*j),55,-(mpu.Pitch*2+20*j));
                 pitch[0]=48;
                 pitch[1]=32;
                 QFont font;
                 font.setPixelSize(15);
                 painter.setFont(font);
-                painter.drawText(65,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(65,-(mpu.Pitch*2+20*j)+5,pitch);
             }
             else
             {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
             }
         }
         for(int j=-85;j<50;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>20)&&(Pitch<=30))
+    if((mpu.Pitch>20)&&(mpu.Pitch<=30))
     {
         for(int j=-5;j<2;j++)
         {
             if(j==0)
             {
                 painter.setPen(red);
-                painter.drawLine(-60,-(Pitch*2+20*j),55,-(Pitch*2+20*j));
+                painter.drawLine(-60,-(mpu.Pitch*2+20*j),55,-(mpu.Pitch*2+20*j));
                 pitch[0]=48;
                 pitch[1]=32;
                 QFont font;
                 font.setPixelSize(15);
                 painter.setFont(font);
-                painter.drawText(65,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(65,-(mpu.Pitch*2+20*j)+5,pitch);
             }
             else
             {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
             }
         }
         for(int j=-105;j<30;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>30)&&(Pitch<=40))
+    if((mpu.Pitch>30)&&(mpu.Pitch<=40))
     {
         for(int j=-6;j<1;j++)
         {
@@ -399,138 +396,138 @@ void Widget::paintEvent(QPaintEvent *)
             {
                 painter.save();
                 painter.setPen(red);
-                painter.drawLine(-60,-(Pitch*2+20*j),55,-(Pitch*2+20*j));
+                painter.drawLine(-60,-(mpu.Pitch*2+20*j),55,-(mpu.Pitch*2+20*j));
                 pitch[0]=48;
                 pitch[1]=32;
                 QFont font;
                 font.setPixelSize(15);
                 painter.setFont(font);
-                painter.drawText(65,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(65,-(mpu.Pitch*2+20*j)+5,pitch);
                 painter.restore();
             }
             else
             {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
             }
         }
         for(int j=-125;j<10;j++)
         {
                 if ((j % 10) == 0)
 
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>40)&&(Pitch<=50))
+    if((mpu.Pitch>40)&&(mpu.Pitch<=50))
     {
         for(int j=-7;j<0;j++)
         {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
         }
         for(int j=-145;j<-10;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>50)&&(Pitch<=60))
+    if((mpu.Pitch>50)&&(mpu.Pitch<=60))
     {
         for(int j=-8;j<-1;j++)
         {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
         }
         for(int j=-165;j<-30;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>60)&&(Pitch<=70))
+    if((mpu.Pitch>60)&&(mpu.Pitch<=70))
     {
         for(int j=-9;j<-2;j++)
         {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
         }
         for(int j=-185;j<-50;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>70)&&(Pitch<=80))
+    if((mpu.Pitch>70)&&(mpu.Pitch<=80))
     {
         for(int j=-9;j<-3;j++)
         {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
         }
         for(int j=-185;j<-70;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if((Pitch>80)&&(Pitch<=90))
+    if((mpu.Pitch>80)&&(mpu.Pitch<=90))
     {
         for(int j=-9;j<-4;j++)
         {
                 painter.setPen(blank);
-                painter.drawLine(-50,-(Pitch*2+20*j),45,-(Pitch*2+20*j));
+                painter.drawLine(-50,-(mpu.Pitch*2+20*j),45,-(mpu.Pitch*2+20*j));
                 pitch[0]=fabs(j)+48;
                 pitch[1]=48;
                 QFont font;
                 font.setPixelSize(12);
                 painter.setFont(font);
-                painter.drawText(55,-(Pitch*2+20*j)+5,pitch);
+                painter.drawText(55,-(mpu.Pitch*2+20*j)+5,pitch);
         }
         for(int j=-185;j<-90;j++)
         {
                 if ((j % 10) == 0)
-               painter.drawLine(-30,-(Pitch*2+j),25,-(Pitch*2+j));
+               painter.drawLine(-30,-(mpu.Pitch*2+j),25,-(mpu.Pitch*2+j));
            }
     }
 
-    if ( (Pitch>=-20)&&(Pitch<-10) )
+    if ( (mpu.Pitch>=-20)&&(mpu.Pitch<-10) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=-2;j<5;j++)
         {
             if(j==0)
@@ -563,9 +560,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-30)&&(Pitch<-20) )
+    if ( (mpu.Pitch>=-30)&&(mpu.Pitch<-20) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=-1;j<6;j++)
         {
             if(j==0)
@@ -598,9 +595,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-40)&&(Pitch<-30) )
+    if ( (mpu.Pitch>=-40)&&(mpu.Pitch<-30) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=0;j<7;j++)
         {
             if(j==0)
@@ -633,9 +630,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-50)&&(Pitch<-40) )
+    if ( (mpu.Pitch>=-50)&&(mpu.Pitch<-40) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=1;j<8;j++)
         {
                 painter.setPen(blank);
@@ -655,9 +652,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-60)&&(Pitch<-50) )
+    if ( (mpu.Pitch>=-60)&&(mpu.Pitch<-50) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=2;j<9;j++)
         {
                 painter.setPen(blank);
@@ -677,9 +674,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-70)&&(Pitch<-60) )
+    if ( (mpu.Pitch>=-70)&&(mpu.Pitch<-60) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=3;j<10;j++)
         {
                 painter.setPen(blank);
@@ -699,9 +696,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-80)&&(Pitch<-70) )
+    if ( (mpu.Pitch>=-80)&&(mpu.Pitch<-70) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=4;j<10;j++)
         {
                 painter.setPen(blank);
@@ -721,9 +718,9 @@ void Widget::paintEvent(QPaintEvent *)
            }
     }
 
-    if ( (Pitch>=-90)&&(Pitch<-80) )
+    if ( (mpu.Pitch>=-90)&&(mpu.Pitch<-80) )
     {
-        draw_Pitch=Pitch*2;
+        draw_Pitch=mpu.Pitch*2;
         for(int j=5;j<10;j++)
         {
                 painter.setPen(blank);

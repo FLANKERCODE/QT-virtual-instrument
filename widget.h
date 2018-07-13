@@ -6,6 +6,11 @@
 #include <QDialog>
 #include <QPaintEvent>
 
+#include <QDebug>
+#include <QLCDNumber>
+#include <QPainter>
+#include <math.h>
+
 #include "posix_qextserialport.h"
 #include "lcd.h"
 #include "gps.h"
@@ -37,40 +42,8 @@ private:
 
     GPS gps;
     MPUGET mpu;
-
-    QByteArray MPU;
-    double TEM;
-    double TL;
-    double TH;
-
-    double Roll;
-    double RollL;
-    double RollH;
-
-    double Pitch;
-    double PitchL;
-    double PitchH;
-
-    double draw_Pitch;
-
-
-    double Yaw;
-    double YawL;
-    double YawH;
-
-    double Pa;
-    double p0;
-    double p1;
-    double p2;
-    double p3;
-
-    double High;
-    double h0;
-    double h1;
-    double h2;
-    double h3;
-
  //   QLCDNumber *lcdNumber;
+    double draw_Pitch;
 
 
 private slots:
