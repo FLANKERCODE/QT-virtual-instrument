@@ -7,8 +7,8 @@
 #include <QPaintEvent>
 
 #include "posix_qextserialport.h"
-
-//#include<qlcdnumber.h>
+#include "lcd.h"
+#include "gps.h"
 
 //class QLCDNumber;
 namespace Ui {
@@ -33,31 +33,6 @@ private:
     QTimer *readTimer;
     QTimer *readTimer2;
     QTimer *timer;
-
-
-    QByteArray GPSdate;
-    QByteArray N;
-    QByteArray E;
-    QByteArray Altitude;
-    QByteArray Geoidalheight;
-    QByteArray Lat;
-    QByteArray Lng;
-    QByteArray Groudrat;
-    QByteArray time;
-
-    double lat_1;
-    double lat_2;
-    double lng_1;
-    double lng_2;
-    double groudrat;
-    double altitude;
-    double geoidalheight;
-    double h;
-    double m;
-    double s;
-    double year;
-    double month;
-    double day;
 
     QByteArray MPU;
     double TEM;
